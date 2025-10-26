@@ -1,0 +1,47 @@
+@use "../../styles/tokens" as *;
+@use "../../styles/utilities" as *;
+
+.c-practice-card {
+  display: flex;
+  flex-direction: column;
+  gap: $space-sm;
+  border-radius: $radius-md;
+  border: 1px solid rgba($color-text, 0.08);
+  padding: 1.5rem;
+  background-color: #ffffff;
+  box-shadow: none;
+  transition: box-shadow 0.2s ease;
+
+  &:hover {
+    box-shadow: $shadow-sm;
+  }
+}
+
+.c-practice-summary {
+  display: flex;
+  flex-direction: column;
+  gap: $space-sm;
+  border-radius: $radius-md;
+  border: 1px dashed rgba($color-text, 0.2);
+  padding: 1.5rem;
+  background: rgba($color-text, 0.02);
+
+  &__placeholder {
+    display: flex;
+    flex-direction: column;
+    gap: $space-sm;
+  }
+
+  &__intro {
+    color: rgba($color-text, 0.65);
+  }
+
+  &__counts {
+    display: flex;
+    flex-direction: column;
+    gap: $space-sm;
+    margin: 0;
+    padding-left: 1.2rem;
+    list-style: disc;
+  }
+}

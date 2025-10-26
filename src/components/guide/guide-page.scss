@@ -1,0 +1,175 @@
+@use "../../styles/tokens" as *;
+@use "../../styles/utilities" as *;
+
+.c-guide {
+  display: flex;
+  flex-direction: column;
+  gap: $space-lg;
+
+  &__intro {
+    @extend .u-card;
+    background-color: $color-primary;
+    color: #ffffff;
+    display: flex;
+    flex-direction: column;
+    gap: $space-sm;
+    padding: 2.5rem;
+  }
+
+  &__lead {
+    font-size: 0.95rem;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    opacity: 0.85;
+  }
+
+  &__title {
+    font-size: clamp(2rem, 4vw, 2.8rem);
+    font-weight: 700;
+    line-height: 1.2;
+  }
+
+  &__overview {
+    font-size: 1.05rem;
+    line-height: 1.7;
+    opacity: 0.95;
+  }
+
+  &__section {
+    @extend .u-card;
+    display: flex;
+    flex-direction: column;
+    gap: $space-sm;
+    padding: 2rem;
+  }
+
+  &__heading {
+    font-size: 1.5rem;
+    font-weight: 600;
+    color: $color-primary;
+    margin: 0;
+  }
+
+  &__description {
+    margin: 0;
+    line-height: 1.8;
+    color: $color-text;
+  }
+
+  &__block {
+    display: flex;
+    flex-direction: column;
+    gap: $space-xs;
+  }
+
+  &__label {
+    font-weight: 600;
+    color: $color-primary;
+    letter-spacing: 0.02em;
+  }
+
+  &__list {
+    margin: 0;
+    padding-left: 1.2rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.4rem;
+  }
+
+  &__list--numbered {
+    list-style-type: decimal;
+  }
+
+  &__list--bulleted {
+    list-style-type: disc;
+  }
+
+  &__list-item {
+    line-height: 1.6;
+    color: $color-text;
+  }
+
+  &__samples {
+    display: grid;
+    gap: $space-sm;
+  }
+
+  &__note {
+    font-size: 0.9rem;
+    color: rgba($color-text, 0.75);
+  }
+
+  &__related {
+    @extend .u-card;
+    display: flex;
+    flex-direction: column;
+    gap: $space-sm;
+    padding: 2rem;
+  }
+
+  &__related-title {
+    font-size: 1.25rem;
+    font-weight: 600;
+    color: $color-primary;
+  }
+
+  &__related-links {
+    display: flex;
+    flex-wrap: wrap;
+    gap: $space-sm;
+  }
+
+  &__related-link {
+    @extend .u-btn;
+    padding: 0.5rem 1.5rem;
+    text-decoration: none;
+  }
+}
+
+.c-code-sample {
+  background-color: #0f172a;
+  border-radius: $radius-md;
+  color: #e2e8f0;
+  display: flex;
+  flex-direction: column;
+  gap: $space-xs;
+  padding: $space-sm;
+
+  &__caption {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 0.75rem;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    opacity: 0.8;
+  }
+
+  &__file {
+    font-weight: 600;
+  }
+
+  &__meta {
+    font-family: monospace;
+  }
+
+  &__pre {
+    margin: 0;
+    overflow-x: auto;
+    font-size: 0.85rem;
+    line-height: 1.6;
+    white-space: pre;
+  }
+}
+
+@media (min-width: 768px) {
+  .c-guide {
+    &__section {
+      padding: 2.5rem;
+    }
+
+    &__samples {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+  }
+}

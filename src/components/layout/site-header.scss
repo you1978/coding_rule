@@ -1,0 +1,34 @@
+@use "../../styles/tokens" as *;
+@use "../../styles/utilities" as *;
+
+.c-header {
+  border-bottom: 1px solid rgba($color-text, 0.08);
+  background-color: #ffffff;
+
+  &__inner {
+    @extend .u-inline-center;
+    align-items: center;
+    justify-content: space-between;
+    padding: 1rem 1.5rem;
+  }
+
+  &__brand {
+    font-weight: 700;
+    color: $color-primary;
+  }
+
+  &__nav {
+    ul {
+      @extend .u-inline-center;
+      gap: $space-md;
+      margin: 0;
+      padding: 0;
+      list-style: none;
+    }
+
+    a {
+      color: $color-text;
+      font-weight: 500;
+    }
+  }
+}
