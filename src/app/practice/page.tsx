@@ -1,7 +1,12 @@
-import type { Metadata } from "next";
+"use client";
+
+import { useState, useMemo } from "react";
 import Link from "next/link";
-import { practiceQuestions } from "@/content/practice";
+import { practiceQuestions, type PracticeQuestion } from "@/content/practice";
 import "@/components/practice/practice.scss";
+import { Badge } from "@/components/badge/Badge";
+import { PracticeSummary } from "@/components/practice/PracticeSummary";
+import { DifficultyFilter } from "@/components/practice/DifficultyFilter";
 
 const difficultyLabel: Record<string, string> = {
   easy: "初級",
@@ -9,13 +14,20 @@ const difficultyLabel: Record<string, string> = {
   hard: "上級",
 };
 
-export const metadata: Metadata = {
-  title: "練習問題 | Next.js + Tailwind + SCSS コーディング規約",
-  description:
-    "Tailwind と SCSS のコーディング規約を身につけるための練習問題30問。基本から応用まで段階的に学べます。",
-};
+type Difficulty = 'all' | keyof typeof difficultyLabel;
 
 export default function PracticePage() {
+  const [selectedDifficulty, setSelectedDifficulty] = useState<Difficulty>('all');
+
+  const filteredQuestions = useMemo(() => {
+    if (selectedDifficulty === 'all') return practiceQuestions;
+    return practiceQuestions.filter(q => q.difficulty === selectedDifficulty);
+  }, [selectedDifficulty]);
+
+  const handleDifficultyChange = (difficulty: Difficulty) => {
+    setSelectedDifficulty(difficulty);
+  };
+
   return (
     <main className="mx-auto flex w-full max-w-5xl flex-col gap-12 px-6 py-16 md:px-10">
       <header className="flex flex-col gap-4 text-center md:text-left">
@@ -27,6 +39,9 @@ export default function PracticePage() {
         </h1>
         <p className="text-lg leading-relaxed text-slate-600 md:max-w-3xl">
           規約の理解度をチェックするために、簡単な確認問題から設計レベルの応用問題まで 30 問用意しました。概要ページや詳細ガイドを参照しつつ、チーム内のトレーニングや自主学習に活用してください。
+        </p>
+        <p className="u-text-muted text-sm">
+          各問題は <Link href="/overview" className="text-blue-500 hover:underline">概要ページ</Link> の内容に基づいています。初めての方はまず概要を確認することをお勧めします。
         </p>
         <div className="flex flex-col items-center gap-3 sm:flex-row sm:items-start">
           <Link
@@ -44,8 +59,16 @@ export default function PracticePage() {
         </div>
       </header>
 
+      <PracticeSummary />
+
       <section className="grid gap-6">
-        {practiceQuestions.map((question) => (
+        <DifficultyFilter 
+          selectedDifficulty={selectedDifficulty}
+          onDifficultyChange={handleDifficultyChange}
+        />
+        
+        <div className="grid gap-6">
+          {filteredQuestions.map((question) => (
           <article
             key={question.id}
             id={question.slug}
@@ -59,18 +82,13 @@ export default function PracticePage() {
               >
                 Q{question.id}
               </span>
-              <span
-                className={`inline-flex items-center rounded-full px-3 py-1 text-xs font-semibold text-white ${
-                  question.difficulty === "easy"
-                    ? "bg-emerald-500"
-                    : question.difficulty === "medium"
-                    ? "bg-amber-500"
-                    : "bg-rose-500"
-                }`}
+              <Badge
+                tone={question.difficulty === "easy" ? "success" : question.difficulty === "medium" ? "warning" : "danger"}
+                className="text-xs font-semibold"
                 aria-label={`難易度: ${difficultyLabel[question.difficulty]}`}
               >
                 {difficultyLabel[question.difficulty]}
-              </span>
+              </Badge>
             </div>
             <p className="mt-4 text-base leading-relaxed text-slate-700">
               {question.prompt}
@@ -89,6 +107,7 @@ export default function PracticePage() {
             </div>
           </article>
         ))}
+        </div>
       </section>
     </main>
   );

@@ -29,13 +29,21 @@ export default function GuidesIndex() {
           </Link>
           を参照してください。
         </p>
-        <div className="mt-2 flex flex-col items-center gap-3 sm:flex-row sm:items-start">
-          <Link
-            href="/overview"
-            className="inline-flex items-center justify-center rounded-full bg-blue-500 px-5 py-3 text-sm font-semibold text-white transition hover:bg-blue-600"
-          >
-            概要を確認する
-          </Link>
+        <div className="mt-2 flex flex-col items-center gap-3 sm:flex-row sm:items-center">
+          <div className="flex flex-wrap items-center gap-3">
+            <Link
+              href="/overview"
+              className="inline-flex items-center justify-center rounded-full bg-blue-500 px-5 py-3 text-sm font-semibold text-white transition hover:bg-blue-600"
+            >
+              概要を確認する
+            </Link>
+            <Link
+              href="/practice"
+              className="u-btn u-btn-accent rounded-full px-6 py-3 text-sm font-medium hover:opacity-90"
+            >
+              練習問題に挑戦
+            </Link>
+          </div>
           <span className="text-sm text-slate-500">
             ルール全体の要約は概要ページで確認できます。
           </span>

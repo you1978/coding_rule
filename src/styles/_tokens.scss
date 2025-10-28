@@ -1,16 +1,28 @@
-// Design tokens centralize reusable values.
+/*
+ * Design Tokens
+ * 
+ * Naming Conventions:
+ * - Colors: $color-{purpose} (e.g., $color-primary, $color-text)
+ * - Spacing: $space-{size} (e.g., $space-sm, $space-md)
+ * - Border Radius: $radius-{size|shape} (e.g., $radius-sm, $radius-pill)
+ * - Shadows: $shadow-{size} (e.g., $shadow-sm, $shadow-md)
+ */
 $color-primary: #3b82f6;
 $color-secondary: #10b981;
 $color-text: #333333;
 $color-surface: #ffffff;
+$color-accent: #f97316; // 重要リンクや通知など
 
 $space-xs: 4px;
 $space-sm: 8px;
 $space-md: 16px;
 $space-lg: 32px;
+$space-xl: 48px; //セクション間余白として利用できる
 
 $radius-sm: 4px;
 $radius-md: 8px;
 $radius-lg: 16px;
+$radius-pill: 999px; //ピル型ボタン向けであることを
 
 $shadow-sm: 0 2px 4px rgba(0, 0, 0, 0.1);
+$shadow-md: 0 4px 12px rgba(0, 0, 0, 0.12); // カードやドロップダウンメニューなど、浮き上がりのある要素に使用

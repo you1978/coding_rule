@@ -31,8 +31,45 @@
   border-radius: $radius-md;
   cursor: pointer;
   transition: opacity 0.2s ease-in-out;
+  font-weight: 500;
+  text-decoration: none;
 
   &:hover {
     opacity: 0.9;
   }
+  &.is-disabled {
+    opacity: 0.5;
+    pointer-events: none;
+  }
+  
+  &-accent {
+    background-color: $color-accent;
+    
+    &:hover {
+      background-color: darken($color-accent, 5%);
+    }
+  }
 }
+
+.u-stack-sm {
+  display: flex;
+  flex-direction: column;
+  gap: $space-sm;
+}
+
+.u-inline-center {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.u-text-muted {
+  color: rgba($color-text, 0.65);
+}
+
+.u-divider {
+  height: 1px;
+  background-color: rgba($color-text, 0.1);
+}
+
+

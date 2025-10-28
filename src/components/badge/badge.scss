@@ -16,6 +16,16 @@
   background-color: rgba($color-text, 0.08);
   color: $color-text;
   transition: background-color 0.2s ease;
+
+  &--primary {
+    background-color: var(--color-primary);
+    color: $color-primary;
+  }
+
+  &--secondary {
+    background-color: var(--color-secondary);
+    color: $color-secondary;
+  }
 }
 
 .c-badge--accent {
