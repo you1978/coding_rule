@@ -1,37 +1,154 @@
 @use "../../styles/tokens" as *;
 @use "../../styles/utilities" as *;
 
+/**
+ * Callout component
+ * Used to highlight important information
+ * @example
+ * <div class="c-callout c-callout--info">
+ *   <h3 class="c-callout__title">Title</h3>
+ *   <div class="c-callout__content">Content</div>
+ * </div>
+ */
 .c-callout {
   @extend .u-stack-sm;
-  padding: 1.5rem;
+  position: relative;
+  padding: 1.25rem 1.5rem;
   border-radius: $radius-md;
-  border: 1px solid rgba($color-text, 0.12);
+  border: 1px solid rgba($color-text, 0.1);
   background-color: rgba($color-primary, 0.05);
+  color: $color-text;
+  font-size: 0.9375rem;
+  line-height: 1.6;
+  transition: all 0.2s ease;
+
+  & + & {
+    margin-top: 1rem;
+  }
+
+  &[role="alert"] {
+    border-width: 2px;
+    border-style: solid;
+    animation: fadeIn 0.3s ease-in-out;
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+    
+    .c-callout__title {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      
+      &::before {
+        content: "";
+        display: inline-block;
+        width: 1.25rem;
+        height: 1.25rem;
+        background-size: contain;
+        background-repeat: no-repeat;
+        background-position: center;
+      }
+    }
+  }
 
   &__title {
-    margin: 0;
-    font-size: 1.1rem;
+    margin: 0 0 0.5rem;
+    font-size: 1rem;
     font-weight: 600;
+    line-height: 1.4;
     color: $color-primary;
   }
 
-  &__body {
+  &__content {
     @extend .u-stack-sm;
-    color: $color-text;
+    color: currentColor;
+
+    > :first-child {
+      margin-top: 0;
+    }
+
+    > :last-child {
+      margin-bottom: 0;
+    }
+  }
+
+  // Modifiers
+  &--info {
+    border-left: 4px solid $color-primary;
+    
+    &[role="alert"] {
+      border-color: $color-primary;
+      background-color: rgba($color-primary, 0.05);
+      
+      .c-callout__title {
+        color: $color-primary;
+        
+        &::before {
+          background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%23007bff'%3E%3Cpath d='M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-6h2v6zm0-8h-2V7h2v2z'/%3E%3C/svg%3E");
+        }
+      }
+    }
+  }
+
+  &--success {
+    border-left: 4px solid $color-secondary;
+    
+    &[role="alert"] {
+      border-color: $color-secondary;
+      background-color: rgba($color-secondary, 0.05);
+      
+      .c-callout__title {
+        color: $color-secondary;
+        
+        &::before {
+          background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%2328a745'%3E%3Cpath d='M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z'/%3E%3C/svg%3E");
+        }
+      }
+    }
+  }
+
+  &--warning {
+    border-left: 4px solid $color-accent;
+    background-color: rgba($color-accent, 0.05);
+    
+    &[role="alert"] {
+      border-color: $color-accent;
+      background-color: rgba($color-accent, 0.05);
+      
+      .c-callout__title {
+        color: $color-accent;
+        
+        &::before {
+          background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%23fd7e14'%3E%3Cpath d='M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-2h2v2zm0-4h-2V7h2v6z'/%3E%3C/svg%3E");
+        }
+      }
+    }
+  }
+
+  &--danger {
+    border-left: 4px solid $color-danger;
+    background-color: rgba($color-danger, 0.05);
+    
+    &[role="alert"] {
+      border-color: $color-danger;
+      background-color: rgba($color-danger, 0.05);
+      
+      .c-callout__title {
+        color: $color-danger;
+        
+        &::before {
+          background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%23dc3545'%3E%3Cpath d='M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-2h2v2zm0-4h-2V7h2v6z'/%3E%3C/svg%3E");
+        }
+      }
+    }
   }
 }
 
-.c-callout--warning {
-  background-color: rgba(249, 115, 22, 0.08);
-  border-color: rgba(249, 115, 22, 0.45);
-}
-
-.c-callout--success {
-  background-color: rgba($color-secondary, 0.08);
-  border-color: rgba($color-secondary, 0.45);
-}
-
-.c-callout--danger {
-  background-color: rgba(239, 68, 68, 0.08);
-  border-color: rgba(239, 68, 68, 0.45);
+@keyframes fadeIn {
+  from { 
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to { 
+    opacity: 1;
+    transform: translateY(0);
+  }
 }

@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { Card } from "@/components/card/Card";
 import { guideTopics } from "@/content/guides";
+import { Callout } from "@/components/callout/Callout";
 
 export const metadata: Metadata = {
   title: "ガイドライン一覧 | Next.js + Tailwind + SCSS",
@@ -29,6 +30,17 @@ export default function GuidesIndex() {
           </Link>
           を参照してください。
         </p>
+         <Callout>
+          これは伏すのテキストでございます。
+        </Callout>
+
+        <Callout title="重要" tone="warning">
+          これは重要な注意書きです。
+        </Callout>
+
+        <Callout title="成功" tone="success">
+          操作が正常に完了しました。
+        </Callout>
         <div className="mt-2 flex flex-col items-center gap-3 sm:flex-row sm:items-center">
           <div className="flex flex-wrap items-center gap-3">
             <Link

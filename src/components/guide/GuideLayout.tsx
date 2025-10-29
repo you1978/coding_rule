@@ -1,6 +1,7 @@
 import Link from "next/link";
 import type { GuideTopic } from "@/content/guides";
 import { CodeSample } from "./CodeSample";
+import { ScrollToTopButton } from "../ui/ScrollToTopButton";
 import "./guide-page.scss";
 
 type GuideLayoutProps = {
@@ -84,6 +85,7 @@ export const GuideLayout = ({ topic, relatedTopics }: GuideLayoutProps) => {
           </div>
         </section>
       ) : null}
+      <ScrollToTopButton />
     </article>
   );
 };

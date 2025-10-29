@@ -89,10 +89,32 @@ export default async function PracticeQuestionPage({ params }: PracticePageProps
       </section>
 
       <section className="c-practice-card">
+        <h2 className="text-xl font-semibold text-slate-900">関連ガイド</h2>
+        {target.recommendedGuides && target.recommendedGuides.length > 0 ? (
+          <div className="mt-4 flex flex-wrap gap-2">
+            {target.recommendedGuides.map((guide) => (
+              <Link
+                key={guide}
+                href={`/guides/${guide}`}
+                className="inline-flex items-center rounded-full bg-blue-50 px-3 py-1.5 text-sm font-medium text-blue-700 hover:bg-blue-100"
+              >
+                {guide.replace(/-/g, ' ')}
+              </Link>
+            ))}
+          </div>
+        ) : (
+          <p className="mt-2 text-sm text-slate-500">関連するガイドはありません</p>
+        )}
+      </section>
+
+      <section className="c-practice-card">
         <h2 className="text-xl font-semibold text-slate-900">実装ヒント</h2>
         <ul className="mt-4 grid gap-3 text-sm leading-relaxed text-slate-600">
           <li>
-            ガイドラインの概要は <Link href="/overview" className="text-slate-900 underline">概要ページ</Link> を参照してください。
+            ガイドラインの概要は <Link href="/overview" className="text-blue-600 hover:underline">概要ページ</Link> を参照してください。
+            {target.recommendedGuides && target.recommendedGuides.length > 0 && (
+              <> また、左記の関連ガイドも参考にしてください。</>
+            )}
           </li>
           <li>
             ファイル保存後は <code className="rounded bg-slate-100 px-2 py-1 font-mono text-xs">npm run lint</code> などで検証することを推奨します。

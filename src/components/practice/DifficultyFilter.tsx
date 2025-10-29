@@ -19,8 +19,7 @@ export const DifficultyFilter = ({
   onDifficultyChange,
 }: DifficultyFilterProps) => {
   return (
-    <div className="mb-6 flex items-center justify-between">
-      <h2 className="text-lg font-semibold text-slate-900">問題一覧</h2>
+    <div className="mb-6 flex items-center justify-end">
       <div className="flex items-center gap-2">
         <span className="text-sm text-slate-500">難易度で絞り込み：</span>
         <div className="relative">

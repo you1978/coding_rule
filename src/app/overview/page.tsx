@@ -1,4 +1,5 @@
-import type { Metadata } from "next";
+import type { Metadata } from 'next';
+import { Callout } from '@/components/callout/Callout';
 
 export const metadata: Metadata = {
   title: "コーディング規約の概要 | Next.js + Tailwind + SCSS",
@@ -64,6 +65,17 @@ export default function OverviewPage() {
         <p className="text-lg leading-relaxed text-slate-600">
           このページでは各ガイドの要点だけを抜粋し、プロジェクトで守るべきルールと意思決定の基準を簡潔に整理しています。詳しい実装手順はガイド一覧から参照してください。
         </p>
+        <Callout>
+          これは伏すのテキストでございます。
+        </Callout>
+
+        <Callout title="重要" tone="warning">
+          これは重要な注意書きです。
+        </Callout>
+
+        <Callout title="成功" tone="success">
+          操作が正常に完了しました。
+        </Callout>
       </header>
 
       <section className="grid gap-6">

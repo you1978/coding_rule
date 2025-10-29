@@ -1,0 +1,16 @@
+@use "../../styles/tokens" as *;
+
+.u-btn--scroll-top {
+  background-color: $color-primary;
+  box-shadow: 0 2px 10px $color-black;
+  transition: all 0.3s ease-in-out;
+
+  &:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px $color-black;
+  }
+
+  &:active {
+    transform: translateY(0);
+  }
+}
