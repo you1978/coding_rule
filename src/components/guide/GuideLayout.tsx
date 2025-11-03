@@ -1,7 +1,9 @@
+"use Client";
 import Link from "next/link";
 import type { GuideTopic } from "@/content/guides";
 import { CodeSample } from "./CodeSample";
 import "./guide-page.scss";
+import { ScrollToTopButton } from "./ScrollToTopButton";
 
 type GuideLayoutProps = {
   topic: GuideTopic;
@@ -84,6 +86,9 @@ export const GuideLayout = ({ topic, relatedTopics }: GuideLayoutProps) => {
           </div>
         </section>
       ) : null}
+
+      {/* トップに戻るボタン導入*/}
+      <ScrollToTopButton />
     </article>
   );
 };

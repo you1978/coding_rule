@@ -4,6 +4,7 @@
  * Practice Question 11 starter styles.
  * Adjust colors, spacing, and modifiers to meet the exercise requirements.
  */
+ // Block
 .c-badge {
   display: inline-flex;
   align-items: center;
@@ -16,24 +17,30 @@
   background-color: rgba($color-text, 0.08);
   color: $color-text;
   transition: background-color 0.2s ease;
-}
 
-.c-badge--accent {
-  background-color: rgba($color-primary, 0.12);
-  color: $color-primary;
-}
+  // Element
+  &__text {
+    display: inline;
+  }
 
-.c-badge--success {
-  background-color: rgba($color-secondary, 0.12);
-  color: $color-secondary;
-}
+  // Modifier
+  &--accent {
+    background-color: rgba($color-primary, 0.12);
+    color: $color-primary;
+  }
 
-.c-badge--warning {
-  background-color: rgba(249, 115, 22, 0.12);
-  color: #f97316;
-}
+  &--success {
+    background-color: rgba($color-secondary, 0.12);
+    color: $color-secondary;
+  }
 
-.c-badge--danger {
-  background-color: rgba(239, 68, 68, 0.12);
-  color: #ef4444;
+  &--warning {
+    background-color: rgba(249, 115, 22, 0.12);
+    color: #f97316;
+  }
+
+  &--danger {
+    background-color: rgba(239, 68, 68, 0.12);
+    color: #ef4444;
+  }
 }

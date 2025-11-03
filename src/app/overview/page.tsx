@@ -1,4 +1,6 @@
 import type { Metadata } from "next";
+{/**課題21-CommonCalloutコンポーネント導入 */}
+import CommonCallouts from "@/components/callout/CommonCallouts";
 
 export const metadata: Metadata = {
   title: "コーディング規約の概要 | Next.js + Tailwind + SCSS",
@@ -65,6 +67,17 @@ export default function OverviewPage() {
           このページでは各ガイドの要点だけを抜粋し、プロジェクトで守るべきルールと意思決定の基準を簡潔に整理しています。詳しい実装手順はガイド一覧から参照してください。
         </p>
       </header>
+
+      {/**課題20-Callout コンポーネントを使用して注意書きとヒントを表示 */}
+      {/* <Callout title="注意" tone="warning">
+        このページの内容は学習用です。実際のプロジェクトでは適切な規約に従ってください。
+      </Callout> */}
+      {/* <Callout title="ヒント" tone="info">
+        コーディング規約を守ると、チーム開発がスムーズになります。
+      </Callout> */}
+
+      {/**課題21-共通の Callout ブロックを追加 */}
+      <CommonCallouts />
 
       <section className="grid gap-6">
         {sections.map((section) => (

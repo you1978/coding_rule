@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { Card } from "@/components/card/Card";
 import { guideTopics } from "@/content/guides";
+import CommonCallouts from "@/components/callout/CommonCallouts";
 
 export const metadata: Metadata = {
   title: "ガイドライン一覧 | Next.js + Tailwind + SCSS",
@@ -40,7 +41,19 @@ export default function GuidesIndex() {
             ルール全体の要約は概要ページで確認できます。
           </span>
         </div>
+        {/* 課題15- /practice ページへ移動するCTAボタン */}
+        <div className="mt-4 flex flex-col items-center gap-3 sm:flex-row sm:items-start">
+          <Link
+            href="/practice"
+            className="u-btn u-btn--accent"
+          >
+            練習問題に挑戦する
+          </Link>
+        </div>
       </header>
+
+      {/* 課題21-共通の Callout ブロックを追加 */}
+      <CommonCallouts />
 
       <section className="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
         {guideTopics.map((topic) => (

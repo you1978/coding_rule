@@ -51,7 +51,7 @@ export default async function PracticeQuestionPage({ params }: PracticePageProps
   const target = question;
 
   return (
-    <main className="mx-auto flex w-full max-w-3xl flex-col gap-10 px-6 py-16 md:px-8">
+    <main className="u-smooth-scroll mx-auto flex w-full max-w-3xl flex-col gap-10 px-6 py-16 md:px-8">
       <nav aria-label="パンくず" className="text-sm text-slate-500">
         <Link href="/practice" className="hover:text-slate-900">
           練習問題一覧
@@ -102,6 +102,22 @@ export default async function PracticeQuestionPage({ params }: PracticePageProps
           </li>
         </ul>
       </section>
+
+      {/**課題18 */}
+      {target.recommendedGuides && target.recommendedGuides.length > 0 && (
+        <section className="c-practice-card">
+          <h2 className="text-xl font-semibold text-slate-900">関連ガイド</h2>
+          <ul className="mt-4 grid gap-2 text-sm text-blue-600">
+            {target.recommendedGuides.map((guide) => (
+              <li key={guide}>
+                <Link href={`/guides/${guide}`} className="underline hover:text-blue-800">
+                  {guide}
+                </Link>
+              </li>
+            ))}
+          </ul>
+        </section>
+      )}
 
       <div className="flex flex-wrap gap-3 text-sm">
         <Link

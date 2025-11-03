@@ -36,3 +36,49 @@
     opacity: 0.9;
   }
 }
+
+.u-btn--accent {
+  background-color: $color-accent;
+  color: #ffffff;
+
+  &:hover {
+    opacity: 0.9;
+  }
+}
+
+
+// 子要素を縦に積み、間隔 $space-sm を設定する縦積みユーティリティ
+.u-stack-sm {
+  display: flex;
+  flex-direction: column;
+  gap: $space-sm;
+}
+
+// テキストとアイコンを横並びにし、中央揃えにするユーティリティ
+.u-inline-center {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+// 補足説明用のテキストに使用できるように、文字色を設定するユーティリティ 
+.u-text-muted {
+  color: rgba($color-text, 0.65);
+}
+
+//  高さと背景色の区切り線として使用するユーティリティ
+.u-driver {
+  height: 1px;
+  background:rgba($color-text, 0.1); 
+}
+
+// 無効状態を表現するために設定するユーティリティ
+.u-btn.is-disabled {
+  opacity: 0.5;
+  pointer-events: none;
+}
+
+// 滑らかにスクロール
+.u-smooth-scroll {
+  scroll-behavior: smooth;
+}

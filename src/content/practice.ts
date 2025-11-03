@@ -4,6 +4,7 @@ export type PracticeQuestion = {
   difficulty: "easy" | "medium" | "hard";
   prompt: string;
   files: string[];
+  recommendedGuides?: string[]; // recommendedGuides プロパティ追加
 };
 
 export const practiceQuestions: PracticeQuestion[] = [
@@ -14,6 +15,7 @@ export const practiceQuestions: PracticeQuestion[] = [
     prompt:
       "src/styles/_tokens.scss に $color-accent: #f97316; を追加し、コメントで想定用途 (重要リンクや通知など) を明記してください。",
     files: ["src/styles/_tokens.scss"],
+    recommendedGuides: ["bem-basics", "component-design"],
   },
   {
     id: 2,
@@ -22,6 +24,7 @@ export const practiceQuestions: PracticeQuestion[] = [
     prompt:
       "src/styles/_tokens.scss の spacing セクションに $space-xl: 48px; を追加し、セクション間余白として利用できるようにしてください。",
     files: ["src/styles/_tokens.scss"],
+    recommendedGuides: ["scss-tokens", "badge-style-guide"],
   },
   {
     id: 3,
