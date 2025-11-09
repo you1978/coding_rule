@@ -1,0 +1,12 @@
+@use "tokens" as *;
+
+// SMACSS: Theme layer toggles palette-level variations.
+.t-surface-default {
+  background-color: $color-surface;
+  color: $color-text;
+}
+
+.t-surface-inverse {
+  background-color: $color-text;
+  color: $color-surface;
+}

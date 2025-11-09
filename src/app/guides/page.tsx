@@ -6,7 +6,7 @@ import { guideTopics } from "@/content/guides";
 export const metadata: Metadata = {
   title: "ガイドライン一覧 | Next.js + Tailwind + SCSS",
   description:
-    "Tailwind と SCSS のコーディング規約を項目ごとに解説するガイド一覧ページです。",
+    "Tailwind · BEM · SMACSS を組み合わせたコーディング規約を項目ごとに解説するガイド一覧ページです。",
 };
 
 export default function GuidesIndex() {
@@ -20,7 +20,7 @@ export default function GuidesIndex() {
           コーディング規約の詳細ガイド
         </h1>
         <p className="text-lg text-slate-600 md:max-w-3xl">
-          各項目ごとの実装手順と運用のコツをまとめました。Tailwind と SCSS を組み合わせた開発のベストプラクティスを、具体的なステップとチェックリスト付きで確認できます。
+          各項目ごとの実装手順と運用のコツをまとめました。Tailwind・BEM・SMACSS を組み合わせた開発のベストプラクティスを、具体的なステップとチェックリスト付きで確認できます。
         </p>
         <p className="text-sm text-slate-500 md:max-w-3xl">
           練習問題で手を動かしたい方は

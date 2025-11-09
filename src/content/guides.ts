@@ -28,22 +28,23 @@ export const guideTopics: GuideTopic[] = [
   {
     slug: "basic-policy",
     title: "基本方針",
-    lead: "Tailwind のスピード感と SCSS の構造化を両立させるための運用哲学です。",
+    lead: "BEM モジュールと SMACSS レイヤーを軸に、Tailwind の俊敏さを補完する運用哲学です。",
     overview:
-      "プロジェクトの初期段階でチーム全員が共有すべき価値観と判断基準をまとめています。設計時の迷いを解消し、読みやすさと再利用性を最優先にしたフロントエンド開発を実現します。",
+      "Block / Element / Modifier の責務分解と Base / Layout / Module / State / Theme のレイヤー順をセットで共有し、設計時の迷いを解消します。Tailwind は瞬発力、SCSS は持続力を担うと全員が理解した状態をゴールとします。",
     sections: [
       {
         heading: "役割分担の考え方",
         description:
-          "Tailwind はレイアウトや余白など瞬発力が求められるピクセル調整に使用し、SCSS は再利用される UI パターン・トークンの管理に集中させます。",
+          "Tailwind は画面単位の細かなレイアウト調整、SCSS は BEM + SMACSS で構造と状態を管理します。Base は要素リセット、Layout はページ骨格、Module は `.c-`、State は `.is-` / `.has-`、Theme は配色差分を担当します。",
         steps: [
-          "ワイヤーフレーム段階で Tailwind で実装する領域と SCSS に切り出す領域を決める",
-          "SCSS 側では mixin や function を極力避け、値はトークンに集約する",
-          "マルチユースを想定したら SCSS コンポーネント化を検討する",
+          "ワイヤーフレーム時に Base/Layout (Tailwind + `.l-`) と Module/State (BEM) の境界を図示する",
+          "SCSS では mixin/function よりもトークン利用とクラス命名で再利用性を担保する",
+          "複数画面で再利用するなら `.c-` と `.is-` の組み合わせでモジュール化し、サンプルを Guide に追記する",
         ],
         checklist: [
-          "Tailwind のクラスが 10 個以上並んだらユーティリティ or SCSS 化を検討",
-          "SCSS 内で Tailwind と同一責務の記述がないか確認",
+          "Tailwind のクラスが 10 個以上並んだら `.l-` または `.u-` へ昇格を検討",
+          "SCSS 側で Tailwind と責務が重複していないか (特に gap / flex / color)",
+          "State クラスで `!important` を使用していないか",
         ],
         samples: [
           {
@@ -58,11 +59,11 @@ export const guideTopics: GuideTopic[] = [
       {
         heading: "読みやすさと再利用性",
         description:
-          "BEM 準拠の命名と接頭辞ルールを守り、誰が見ても責務が分かるようにします。型定義や props の設計でも同じ姿勢を徹底し、コンポーネント単位で完結する構造を維持します。",
+          "BEM 準拠と SMACSS レイヤー順を守り、誰が見ても責務が分かるコードを徹底します。TypeScript の props でも命名規則を踏襲し、Block 単位で完結する構造を維持します。",
         steps: [
-          "props は UI 構造に直結する最小限のものに絞る",
-          "SCSS では BEM を活用し、入れ子は 3 階層以内にする",
-          "ユーティリティ化した方が早いケースを常に検討する",
+          "props は Block の構造に直結する最小限のものに絞り、State はクラスで表現する",
+          "SCSS のネストは 3 階層以内、Element と Modifier の混在を避ける",
+          "同じパターンが 3 箇所で現れたら `.u-` or `.l-` へ切り出し、ドキュメントへ追記する",
         ],
         samples: [
           {
@@ -80,22 +81,23 @@ export const guideTopics: GuideTopic[] = [
   {
     slug: "file-structure",
     title: "ファイル構成",
-    lead: "スタイルの責務を明確にし、変更範囲を予測しやすい構造を採用します。",
+    lead: "SMACSS レイヤーと BEM の配置を揃え、変更範囲を予測しやすい構造を採用します。",
     overview:
-      "styles ディレクトリでデザインレイヤーを整理し、app ディレクトリでは Next.js のルーティング規約に沿ってページを配置します。Tailwind の設定は globals と main.scss を分けて管理します。",
+      "styles ディレクトリでは Base / Layout / Module (Utilities) / State / Theme の順に SCSS を構成し、app ディレクトリでは Next.js のルーティング規約に沿って BEM モジュールを読み込みます。",
     sections: [
       {
         heading: "SCSS ディレクトリ",
         description:
-          "`src/styles` 以下に `_tokens.scss` `_utilities.scss` `_base.scss` `main.scss` を配置し、`main.scss` をレイアウトコンポーネントで読み込みます。",
+          "`src/styles` に `_tokens.scss` `_base.scss` `_layout.scss` `_utilities.scss` `_states.scss` `_themes.scss` を用意し、`main.scss` で SMACSS の読み込み順を固定します。",
         steps: [
-          "トークン・ユーティリティ・ベースの 3 レイヤーを必ず分離",
-          "新しいユーティリティを作成する際は `u-` 接頭辞を付ける",
-          "main.scss には @use のみを記述し順序を崩さない",
+          "トークンは `_tokens.scss` に集約し、他のファイルは `@use` で参照する",
+          "Base → Layout → Utilities(Module) → States → Themes の順を `main.scss` で維持する",
+          "新しいユーティリティやレイアウトを追加したら該当ファイルにコメント付きで追記する",
         ],
         checklist: [
-          "SCSS ファイル名の先頭に `_` を付けてファイル単位のビルドを抑止",
-          "src/styles 配下以外にデザイントークンを置かない",
+          "SCSS ファイル名には `_` を付けて単体ビルドを防止",
+          "レイヤー順を乱す `@use` が無いか確認",
+          "styles 以外の場所へトークンやレイヤーファイルを配置していないか",
         ],
         samples: [
           {
@@ -112,15 +114,23 @@ export const guideTopics: GuideTopic[] = [
             startLine: 1,
             endLine: 40,
           },
+          {
+            label: "src/styles/_layout.scss",
+            path: "src/styles/_layout.scss",
+            language: "scss",
+            startLine: 1,
+            endLine: 40,
+          },
         ],
       },
       {
         heading: "コンポーネント階層",
         description:
-          "再利用できる UI は `src/components` に置き、ページ固有の UI は `src/app/(feature)/page.tsx` 付近に限定します。",
+          "Layout (l-) / Utility (u-) / Component (c-) クラスの置き場を分離し、再利用できる UI は `src/components` に集約します。",
         steps: [
-          "BEM 準拠の SCSS をコンポーネントディレクトリに同梱",
-          "Storybook 等を使う場合は components 配下を出発点にする",
+          "BEM 準拠の SCSS をコンポーネントディレクトリに同梱し、Module レイヤーとして扱う",
+          "Storybook 等の UI カタログも `src/components` を出発点に構成する",
+          "Layout 固有のラッパーは `src/styles/_layout.scss` または `src/components/layout` へまとめる",
         ],
         samples: [
           {
@@ -138,18 +148,18 @@ export const guideTopics: GuideTopic[] = [
   {
     slug: "tailwind-vs-scss",
     title: "Tailwind と SCSS の棲み分け",
-    lead: "リアルタイムなレイアウト調整は Tailwind、構造化されたパターンは SCSS に委ねます。",
+    lead: "Tailwind で瞬発力を担保しつつ、BEM + SMACSS で持続力を確保する判断軸をまとめます。",
     overview:
-      "Tailwind で瞬発力を、SCSS で持続力を担保する運用ルールを紹介します。",
+      "Tailwind は一過性のレイアウト調整・レスポンシブ対応を担い、SCSS はモジュール化された UI・状態・テーマ管理を担当します。両者の切り替え基準を明文化して属人化を防ぎます。",
     sections: [
       {
         heading: "Tailwind を使う場面",
         description:
-          "余白・flex/grid・レスポンシブ・簡易な色指定など、ビルドレスな調整が求められる箇所は Tailwind を優先します。",
+          "余白・flex/grid・レスポンシブ・一時的なテキスト色など、マークアップ付近で完結する調整は Tailwind を優先します。必要に応じて `.l-` や `.u-` に昇格させます。",
         checklist: [
           "margin/padding/gap/justify/align 系は Tailwind で指定",
           "レスポンシブは sm:/md:/lg: のプリフィックスを必須化",
-          "ダークモードのテーマ切り替えも Tailwind の variant で管理",
+          "テーマ切り替えはまず Tailwind Variant で検討し、複数ページに跨るなら Theme レイヤーへ移管",
         ],
         samples: [
           {
@@ -164,11 +174,11 @@ export const guideTopics: GuideTopic[] = [
       {
         heading: "SCSS を使う場面",
         description:
-          "複数箇所で共有する UI パターンや、Tailwind クラスが冗長になる装飾は SCSS に切り出します。",
+          "複数ページで共有する UI・状態・テーマ差分は BEM + SMACSS の Module/State/Theme レイヤーへ切り出します。",
         steps: [
-          "まずユーティリティ (u-) を検討し、複合的ならコンポーネント (c-) を作成",
-          "トークンを参照し、値の直書きを避ける",
-          "アニメーションや擬似要素を含む場合は SCSS 内で完結",
+          "まずユーティリティ (u-) やレイアウト (l-) で解決できるか検討し、複合的なら `.c-` で Block を定義",
+          "トークンを参照し、Modifier / State も含めて 1 ファイルで自己完結させる",
+          "アニメーション・擬似要素・テーマ差分は Theme レイヤーと連携させる",
         ],
         samples: [
           {
@@ -186,18 +196,18 @@ export const guideTopics: GuideTopic[] = [
   {
     slug: "naming",
     title: "命名規則",
-    lead: "接頭辞 + BEM で責務を明確化し、スタイルの読み解きを容易にします。",
+    lead: "BEM の構造と SMACSS のレイヤー接頭辞を組み合わせ、責務を一目で判別できる命名を徹底します。",
     overview:
-      "utility / component / layout / state のプレフィックスで責務を区別し、BEM の Block / Element / Modifier を徹底します。",
+      "Utility / Component / Layout / State / Theme の接頭辞と BEM の Block / Element / Modifier をセットで適用し、読みやすさと再利用性を確保します。",
     sections: [
       {
         heading: "接頭辞ルール",
         description:
-          "`u-` `c-` `l-` `is-` `has-` を軸に責務が一目で分かるようにします。ファイル名も `c-card.scss` のように合わせます。",
+          "`u-` `c-` `l-` `is-` `has-` `t-` を軸に役割を明確化します。ファイル名やディレクトリも SMACSS のレイヤーに追従させます。",
         steps: [
-          "Utility: `.u-flex-center` など単一責務",
-          "Component: `.c-card` のように自立した UI",
-          "Layout: `.l-header` でページ構造を表現",
+          "Utility: `.u-flex-center` のように 1 つのプロパティセットへ責務を限定",
+          "Component/Module: `.c-card`, `.c-card__header` のように BEM を適用",
+          "Layout: `.l-shell`, `.l-stack` でページ骨格を共有、Theme: `.t-surface-inverse` で配色差分を表現",
         ],
         samples: [
           {
@@ -207,24 +217,31 @@ export const guideTopics: GuideTopic[] = [
             startLine: 1,
             endLine: 60,
           },
+          {
+            label: "src/styles/_layout.scss",
+            path: "src/styles/_layout.scss",
+            language: "scss",
+            startLine: 1,
+            endLine: 40,
+          },
         ],
       },
       {
         heading: "BEM の適用",
         description:
-          "Block は独立性を持たせ、Element は Block 内でのみ利用、Modifier は状態変更を担います。",
+          "Block は独立性を持ち、Element は Block 内のみで使用、Modifier は状態差分を担います。State レイヤーとの併用順もルール化します。",
         checklist: [
           "`__` は 1 階層のみ (例: `.c-card__header`)",
-          "Modifier には `--` を使用し値は明示する (例: `.c-card--secondary`)",
-          "状態は `is-/has-` を優先し、Modifier と併用しない",
+          "Modifier には `--` を使用し `.c-button--secondary` のように値を明示する",
+          "状態は `is-/has-` レイヤーを優先し、`class=\"c-button c-button--sm is-disabled\"` の順で併用する",
         ],
         samples: [
           {
-            label: "src/components/card/card.scss",
-            path: "src/components/card/card.scss",
+            label: "src/components/button/button.scss",
+            path: "src/components/button/button.scss",
             language: "scss",
             startLine: 1,
-            endLine: 80,
+            endLine: 79,
           },
         ],
       },

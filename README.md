@@ -5,9 +5,11 @@
 
 - Tailwind と SCSS の棲み分け
 - デザイントークン (_tokens.scss)
-- ユーティリティコンポーネント (_utilities.scss)
-- BEM + 接頭辞規則 (c- / u- / l- / is- / has-)
+- BEM + SMACSS ハイブリッドのレイヤー規約
+- ユーティリティ / レイアウト / ステートのサンプル実装
 - 練習問題 30 問（初級〜上級）
+
+本プロジェクトでは、モジュールは BEM で責務を明確にしつつ、SMACSS の Base / Layout / Module / State / Theme レイヤーを組み合わせて設計します。レイアウトは `.l-`、ユーティリティは `.u-`、コンポーネントは `.c-`、状態は `.is-` / `.has-` の接頭辞で統一し、Tailwind との棲み分けを文章とコード両面で確認できます。
 
 ## 主な URL
 
@@ -56,9 +58,12 @@ src/
     layout/         … サイト全体のヘッダー・フッター
   styles/
     _tokens.scss    … デザイントークン
-    _utilities.scss … ユーティリティクラス
-    _base.scss      … ベーススタイル
-    main.scss       … SCSS エントリーポイント
+    _base.scss      … Base (SMACSS) 層
+    _layout.scss    … Layout 層。l- 接頭辞の構造クラス
+    _utilities.scss … Module/Utility 層の共通クラス
+    _states.scss    … State 層。is-/has- クラス
+    _themes.scss    … Theme 層。トーン切り替えの雛形
+    main.scss       … SCSS エントリーポイント（レイヤーの読み込み順を定義）
   content/
     guides.ts       … ガイドコンテンツ定義
     practice.ts     … 練習問題定義

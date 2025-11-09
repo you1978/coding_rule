@@ -1,0 +1,16 @@
+@use "tokens" as *;
+
+// SMACSS: State layer stores reusable UI state helpers.
+.is-hidden {
+  display: none !important;
+}
+
+.is-disabled {
+  opacity: 0.5;
+  pointer-events: none;
+}
+
+.has-error {
+  border-color: $color-secondary;
+  color: $color-secondary;
+}
